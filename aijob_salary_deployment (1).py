@@ -67,8 +67,11 @@ for col in encoder:
             st.error(f"❌ Invalid value in {col}. Please select from dropdown.")
             st.stop()
 
-# ===== MATCH COLUMN ORDER =====
-input_df = input_df[columns]
+# ===== MATCH COLUMN ORDER (FIXED) =====
+input_df = pd.get_dummies(input_df)
+
+# match with training columns
+input_df = input_df.reindex(columns=columns, fill_value=0)
 
 # ===== DEBUG (optional) =====
 # st.write("Input Data:", input_df)
